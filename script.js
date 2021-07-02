@@ -67,6 +67,4 @@ botao.addEventListener('click', function () {
   boxe.classList.add('.animaPesq')
   boxe.classList.remove('.animaPesq')
   boxe.innerHTML = ''
-  console.log('teste')
 })
-
