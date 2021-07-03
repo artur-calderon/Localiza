@@ -23,7 +23,7 @@ function puxaDados(pes, apiBase) {
         box.innerHTML = '<h5>Resultados</h5>'
         data.results.forEach(element => {
           // let urlReference = element.photos[0].photo_reference
-         console.log(element.photos[0][1])
+         console.log(element.photos[0].photo_reference)
           // let photo = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${urlReference}&key=${apiBase}`;
           
           // if(urlReference == undefined){
@@ -58,9 +58,8 @@ function puxaDados(pes, apiBase) {
           
 
 // https://inisa.ufms.br/files/2019/04/2196393.jpg
-botao.addEventListener('click', function () {
-  
-  const apiBase = 'AIzaSyCpDwM2kB5sPh1K2wUAG9aTYdZhmwMiqhQ'
+$(botao).click(()=>{
+const apiBase = 'AIzaSyCpDwM2kB5sPh1K2wUAG9aTYdZhmwMiqhQ'
   var search = document.getElementById('pesquisa').value
   puxaDados(search, apiBase)
   var boxe = document.querySelector('.results-pesq')
@@ -68,3 +67,4 @@ botao.addEventListener('click', function () {
   boxe.classList.remove('.animaPesq')
   boxe.innerHTML = ''
 })
+  
