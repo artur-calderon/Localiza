@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container-fluid {
+  background-image: url('https://d1cb96qxozavf7.cloudfront.net/news/shutterstock_565139857-1.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* width: 100%;
+    height: 25%; */
+  text-align: center;
+  padding: 100px;
+}
+.container-fluid h2 {
+  font-size: 5rem;
+}
+.container-fluid p {
+  font-size: 2rem;
+}
+.pesquisa {
+  margin-top: 50px;
+}
+.pesquisa input[type='submit'] {
+  margin-top: 10px;
+}
+.pesquisa input[type='reset'] {
+  margin-top: 10px;
+}
+.results-pesq {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+  height: 0;
+  transition: 1s;
+
+}
+.card {
+  float: left;
+  height: 400px;
+  margin-top: 10px;
+  margin-left: 70px;
+  margin-bottom: 10px;
+}
+/* nao lembro oque isso faz kkkk */
+.animaPesq {
+  height: 500px;
+}
+.footer {
+  position: relative;
+  display: inline-block;
+  margin-top: auto;
+  width: 100%;
+  padding: 30px;
+  text-align: center;
+
+  background-color: rgb(207, 207, 207);
+}
+
+/* Loading pronto pego do github */
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #2299dd;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+.card-img-top{
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+
+
+/* ###################### estilo do loader ############ */
+ .pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #2299dd;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+  display: none;
+}
+
+.pace .pace-progress-inner {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #2299dd, 0 0 5px #2299dd;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -moz-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  -o-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+.pace .pace-activity {
+  display: block;
+  position: fixed;
+  z-index: 2000;
+  top: 80%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border: solid 2px transparent;
+  border-top-color: #2299dd;
+  border-left-color: #2299dd;
+  border-radius: 10px;
+  -webkit-animation: pace-spinner 700ms linear infinite;
+  -moz-animation: pace-spinner 700ms linear infinite;
+  -ms-animation: pace-spinner 700ms linear infinite;
+  -o-animation: pace-spinner 700ms linear infinite;
+  animation: pace-spinner 700ms linear infinite;
+}
+
+@-webkit-keyframes pace-spinner {
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-moz-keyframes pace-spinner {
+  0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-o-keyframes pace-spinner {
+  0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-ms-keyframes pace-spinner {
+  0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes pace-spinner {
+  0% { transform: rotate(0deg); transform: rotate(0deg); }
+  100% { transform: rotate(360deg); transform: rotate(360deg); }
+} 
