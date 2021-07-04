@@ -13,6 +13,7 @@ function puxaDados(pes, apiBase) {
 
   //abre a requisição e coloca o metodo que é GET com a url(endpoint)
   request.open('GET', url, true)
+  request.setRequestHeader("Access-Control-Allow-Origin", "*");
 
   //Carrega a requisição e transforma os dados recebidos em JSON se o status da conexão for boa
   request.onload = function () {
