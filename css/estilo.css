@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 .container-fluid {
   background-image: url('https://d1cb96qxozavf7.cloudfront.net/news/shutterstock_565139857-1.jpg');
@@ -33,6 +34,7 @@
   margin-top: 50px;
   height: 0;
   transition: 1s;
+
 }
 .card {
   float: left;
@@ -52,15 +54,11 @@
   width: 100%;
   padding: 30px;
   text-align: center;
-  /* height: 500px; */
+
   background-color: rgb(207, 207, 207);
 }
-.grid{
-  grid-auto-flow: column;
-  /* gap: 0.5rem; */
-}
 
-/* This is a compiled file, you should be editing the file in the templates directory */
+/* Loading pronto pego do github */
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
