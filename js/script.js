@@ -4,32 +4,39 @@ var botao = document.getElementById('button')
 // função que faz o request para a API do google Usando XMLHttpRequest
 function puxaDados(pes, apiBase) {
   //Endpoint da api do google com o termo pesquisado na variável pes e a KeyAPI na variável apiBase
-  const url = `https://maps.googleapis.com/maps/api/place/textsearch/json?input=${pes}&type=textquery&fields=photo_reference,formatted_address,name,rating,opening_hours&key=${apiBase}`
+  const url = `https://discover.search.hereapi.com/v1/discover?at=-10.8798147,-62.0148152,12&q=${pes}&apiKey=${apiBase}`
 
+  //pega a div onde aparece os resultados
+  var box = document.querySelector('.results-pesq')
   $.ajax({
     url: url,
     method: 'GET'
   }).done(data => {
-    //pega a div onde aparece os resultados
-    var box = document.querySelector('.results-pesq')
-
     //Se o User digitar um valor sem resultados exibe uma mensagem
-    if (data.status == 'ZERO_RESULTS') {
+    if (data.status == 400) {
       alert('Nenhum Resultado Encontrado!')
     } else {
       //insere na div os resultados obtidos da pesquisa
       box.innerHTML = '<h5>Resultados</h5>'
 
       //percorre o array de resultados obitidos
-      data.results.forEach(element => {
+      data.items.forEach(element => {
+        var lat = element['position'].lat
+        var long = element['position'].lng
+        var tel
         var photo = ''
         var urlReference
 
         //se o estabelecimento não tiver foto seta a variável photo com uma imagem pré-definida
-        if (element.photos == undefined) {
+        if (
+          element.photos == undefined ||
+          element['contacts'][0].phone[0].value == null
+        ) {
           photo = 'https://inisa.ufms.br/files/2019/04/2196393.jpg'
+          tel = 'Sem Telefone'
         } else {
           //seta a variável photo com a foto do estabelecimento pesquisado
+          tel = element['contacts'][0].phone[0].value
           urlReference = element.photos[0].photo_reference
           photo = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${urlReference}&key=${apiBase}`
         }
@@ -38,23 +45,23 @@ function puxaDados(pes, apiBase) {
         box.innerHTML += `<div class="card " style="width: 18rem;">
             <img class="card-img-top" src="${photo}" alt="Card image cap">
             <div class="card-body">
-            <h5 class="card-title">${element.name.substring(0, 35)}</h5>
-            <h6>Nota: ${element.rating}</h6>
-            <p class="card-text">${element.formatted_address}</p>
+            <h5 class="card-title">${element.title.substring(0, 35)}</h5>
+            <h6>Tel: ${tel}</h6>
+            <p class="card-text">${element['address'].label}</p>
             <a href="http://maps.google.com/maps?q=${
-              element.name
+              lat + ',' + long
             }" target="_blank" class="btn btn-primary grid">Ver no mapa</a>
             </div>
             </div>
             `
       })
     }
-  }) //end Done
+  })
 }
 
 //funcão que executa a pesquisa
 function pesquisar() {
-  const apiBase = 'AIzaSyCpDwM2kB5sPh1K2wUAG9aTYdZhmwMiqhQ'
+  const apiBase = 'pUIQcCLtEuxbmJNpg0DHaufPhLKxeFiHJzpnUC-Ry1A'
   //pega o valor do input text
   var search = document.getElementById('pesquisa').value
 
