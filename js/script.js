@@ -1,10 +1,12 @@
 //pega o botão de pesquisar no html
 var botao = document.getElementById('button')
 
+
 // função que faz o request para a API do google Usando XMLHttpRequest
-function puxaDados(pes, apiBase) {
-  //Endpoint da api do google com o termo pesquisado na variável pes e a KeyAPI na variável apiBase
-  const url = `https://discover.search.hereapi.com/v1/discover?at=-10.8798147,-62.0148152,12&q=${pes}&apiKey=${apiBase}`
+function puxaDados(pes, apiBase,local) {
+
+    //Endpoint da api HERE com o termo pesquisado na variável pes e a KeyAPI na variável apiBase
+  const url = `https://discover.search.hereapi.com/v1/discover?at=${local}&q=${pes}&apiKey=${apiBase}`
 
   //pega a div onde aparece os resultados
   var box = document.querySelector('.results-pesq')
@@ -13,7 +15,8 @@ function puxaDados(pes, apiBase) {
     method: 'GET'
   }).done(data => {
     //Se o User digitar um valor sem resultados exibe uma mensagem
-    if (data.status == 400) {
+    console.log(data);
+    if (data.items == '') {
       alert('Nenhum Resultado Encontrado!')
     } else {
       //insere na div os resultados obtidos da pesquisa
@@ -24,21 +27,19 @@ function puxaDados(pes, apiBase) {
         var lat = element['position'].lat
         var long = element['position'].lng
         var tel
-        var photo = ''
-        var urlReference
+        var photo = 'https://inisa.ufms.br/files/2019/04/2196393.jpg'
+        
 
         //se o estabelecimento não tiver foto seta a variável photo com uma imagem pré-definida
         if (
-          element.photos == undefined ||
-          element['contacts'][0].phone[0].value == null
+          element['contacts'] == undefined || element['contacts'][0].phone == undefined
         ) {
-          photo = 'https://inisa.ufms.br/files/2019/04/2196393.jpg'
-          tel = 'Sem Telefone'
+          tel = 'Telefone não disponível'
         } else {
           //seta a variável photo com a foto do estabelecimento pesquisado
           tel = element['contacts'][0].phone[0].value
-          urlReference = element.photos[0].photo_reference
-          photo = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${urlReference}&key=${apiBase}`
+          // urlReference = element.photos[0].photo_reference
+          // photo = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${urlReference}&key=${apiBase}`
         }
 
         //adiciona os resultados em um card box
@@ -48,7 +49,7 @@ function puxaDados(pes, apiBase) {
             <h5 class="card-title">${element.title.substring(0, 35)}</h5>
             <h6>Tel: ${tel}</h6>
             <p class="card-text">${element['address'].label}</p>
-            <a href="http://maps.google.com/maps?q=${
+            <a href="http://maps.google.com/maps?q=${element.title + '/' + '@' +
               lat + ',' + long
             }" target="_blank" class="btn btn-primary grid">Ver no mapa</a>
             </div>
@@ -64,8 +65,14 @@ function pesquisar() {
   const apiBase = 'pUIQcCLtEuxbmJNpg0DHaufPhLKxeFiHJzpnUC-Ry1A'
   //pega o valor do input text
   var search = document.getElementById('pesquisa').value
+ // ########### pega localização do user ####################
 
-  puxaDados(search, apiBase)
+ navigator.geolocation.getCurrentPosition(function(position) {
+ let locale = position.coords.latitude + ',' + position.coords.longitude
+
+  puxaDados(search, apiBase,locale)
+});
+
 
   //era pra adicionar uma animação mas não está funcionando ainda
   var boxe = document.querySelector('.results-pesq')
