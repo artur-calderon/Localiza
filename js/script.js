@@ -6,7 +6,7 @@ var botao = document.getElementById('button')
 function puxaDados(pes, apiBase,local) {
 
     //Endpoint da api HERE com o termo pesquisado na variável pes e a KeyAPI na variável apiBase
-  const url = `https://discover.search.hereapi.com/v1/discover?at=${local}&q=${pes}&apiKey=${apiBase}`
+  const url = `https://discover.search.hereapi.com/v1/discover?in=circle:${local};r=10000&q=${pes}&lang=pt-BR&apiKey=${apiBase}`
 
   //pega a div onde aparece os resultados
   var box = document.querySelector('.results-pesq')
